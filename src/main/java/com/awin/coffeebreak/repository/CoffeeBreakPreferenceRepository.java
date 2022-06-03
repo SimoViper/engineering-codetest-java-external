@@ -10,17 +10,10 @@ import org.springframework.data.repository.query.Param;
 
 public interface CoffeeBreakPreferenceRepository extends CrudRepository<CoffeeBreakPreference, Integer> {
 
-    default List<CoffeeBreakPreference> getPreferencesForToday() {
-        return getPreferencesForToday(
-              Instant.now().truncatedTo(ChronoUnit.DAYS),
-              Instant.now().truncatedTo(ChronoUnit.DAYS).plus(1, ChronoUnit.DAYS)
-        );
-    }
-
     @Query("select p from CoffeeBreakPreference p " +
           "where p.requestedDate > :start " +
           "and p.requestedDate < :end")
-    List<CoffeeBreakPreference> getPreferencesForToday(
+    public List<CoffeeBreakPreference> getPreferencesForToday(
           @Param("start") Instant start,
           @Param("end") Instant end
     );
