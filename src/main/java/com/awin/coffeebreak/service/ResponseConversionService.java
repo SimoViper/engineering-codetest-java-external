@@ -46,7 +46,7 @@ public class ResponseConversionService {
                     .appendChild(new Label().appendText(REQUESTED_BY).setStyle(FONT_WEIGHT_BOLD))
                     .appendChild(new Text(preference.getRequestedBy()))
                     .appendChild(new H4().appendText(ORDERS)));
-            preference.getOrders().forEach(order -> {
+            preference.getOrders().stream().forEach(order -> {
                 Div orderDiv = new Div();
                 orderDiv.appendChild(new Table().appendChild(new Tr().appendText(" Type: " + order.getType()))
                         .appendChild(new Tr().appendText(SUB_TYPE + order.getSubType()))
