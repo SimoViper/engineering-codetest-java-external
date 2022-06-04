@@ -1,4 +1,4 @@
-package com.awin.coffeebreak.services;
+package com.awin.coffeebreak.service;
 
 import com.awin.coffeebreak.entity.CoffeeBreakPreference;
 import com.awin.coffeebreak.entity.StaffMember;
@@ -11,6 +11,6 @@ import java.util.List;
 public class EmailNotifier {
 
     public void sendEmail(final StaffMember staffMember) {
-
+        //TODO implementation and error handling for Email notifications.
     }
 }

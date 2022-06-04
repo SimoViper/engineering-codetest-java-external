@@ -2,6 +2,7 @@ package com.awin.coffeebreak.services
 
 import com.awin.coffeebreak.entity.CoffeeBreakPreference
 import com.awin.coffeebreak.entity.StaffMember
+import com.awin.coffeebreak.service.SlackNotifier
 import spock.lang.Specification
 
 import static org.assertj.core.api.Assertions.assertThat

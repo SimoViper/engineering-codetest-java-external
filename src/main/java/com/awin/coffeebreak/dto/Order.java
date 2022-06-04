@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import java.util.List;
+import java.util.Map;
 
 
 @Data
@@ -13,8 +13,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Preference {
-    private List<Order> orders;
-    private String requestedBy;
+public class Order {
 
+    private Type type;
+    private SubType subType;
+    private Map<String, String> details;
 }

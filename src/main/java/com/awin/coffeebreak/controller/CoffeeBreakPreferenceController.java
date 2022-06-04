@@ -1,23 +1,18 @@
 package com.awin.coffeebreak.controller;
 
-import com.awin.coffeebreak.dto.Preference;
 import com.awin.coffeebreak.dto.Preferences;
-import com.awin.coffeebreak.entity.CoffeeBreakPreference;
-import com.awin.coffeebreak.entity.StaffMember;
-import com.awin.coffeebreak.repository.StaffMemberRepository;
-import com.awin.coffeebreak.services.CoffeeBreakService;
-import com.awin.coffeebreak.services.ResponseConversionService;
-import com.awin.coffeebreak.services.SlackNotifier;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import com.awin.coffeebreak.service.CoffeeBreakService;
+import com.awin.coffeebreak.service.ResponseConversionService;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.xml.bind.JAXBException;
@@ -64,10 +59,9 @@ public class CoffeeBreakPreferenceController {
     }
 
     @GetMapping("/notifyStaffMember")
-    public ResponseEntity notifyStaffMember(@RequestParam("staffMemberId") int id) {
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void notifyStaffMember(@RequestParam("staffMemberId") int id) throws NotFoundException {
         coffeeBreakService.sendNotification(id);
-
-        return ResponseEntity.ok().build();
     }
 
 

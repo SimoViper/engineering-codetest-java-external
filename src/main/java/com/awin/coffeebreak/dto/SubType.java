@@ -1,4 +1,5 @@
 package com.awin.coffeebreak.dto;
 
-public interface SubType {
+public enum SubType {
+    COFFEE, TEA, SANDWICH, CRISPS, TOAST;
 }
