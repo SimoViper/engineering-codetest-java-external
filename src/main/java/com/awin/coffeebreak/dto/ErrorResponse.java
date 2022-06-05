@@ -1,4 +1,4 @@
-package com.awin.coffeebreak.errorhandling;
+package com.awin.coffeebreak.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ErrorResponse {
 
-    private ErrorCode  errorCode;
+    private ErrorCode errorCode;
     private String errorMessage;
 }

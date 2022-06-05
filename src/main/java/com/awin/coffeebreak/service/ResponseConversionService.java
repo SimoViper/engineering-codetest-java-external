@@ -3,7 +3,13 @@ package com.awin.coffeebreak.service;
 import com.awin.coffeebreak.dto.Preferences;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hp.gagawa.java.elements.*;
+import com.hp.gagawa.java.elements.Div;
+import com.hp.gagawa.java.elements.H4;
+import com.hp.gagawa.java.elements.Label;
+import com.hp.gagawa.java.elements.P;
+import com.hp.gagawa.java.elements.Table;
+import com.hp.gagawa.java.elements.Text;
+import com.hp.gagawa.java.elements.Tr;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +29,7 @@ public class ResponseConversionService {
     private static final String ORDERS = "Orders: ";
     private static final String REQUESTED_BY = "RequestedBy: ";
     private static final String FONT_WEIGHT_BOLD = "font-weight: bold; ";
+    private static final String TYPE = " Type: ";
 
     private final ObjectMapper objectMapper;
 
@@ -48,7 +55,7 @@ public class ResponseConversionService {
                     .appendChild(new H4().appendText(ORDERS)));
             preference.getOrders().stream().forEach(order -> {
                 Div orderDiv = new Div();
-                orderDiv.appendChild(new Table().appendChild(new Tr().appendText(" Type: " + order.getType()))
+                orderDiv.appendChild(new Table().appendChild(new Tr().appendText(TYPE + order.getType()))
                         .appendChild(new Tr().appendText(SUB_TYPE + order.getSubType()))
                         .appendChild(new Tr().appendText(DETAILS + getDetailsString(order))));
 
@@ -61,9 +68,8 @@ public class ResponseConversionService {
     }
 
     private String getDetailsString(com.awin.coffeebreak.dto.Order order) {
-        final String detailsString = order.getDetails().keySet().stream()
+        return order.getDetails().keySet().stream()
                 .map(e -> e + DELIMITER + order.getDetails().get(e))
                 .collect(Collectors.joining(","));
-        return detailsString;
     }
 }

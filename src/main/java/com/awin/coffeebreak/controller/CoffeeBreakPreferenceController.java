@@ -1,6 +1,7 @@
 package com.awin.coffeebreak.controller;
 
 import com.awin.coffeebreak.dto.Preferences;
+import com.awin.coffeebreak.errorhandling.ValidationErrorException;
 import com.awin.coffeebreak.service.CoffeeBreakService;
 import com.awin.coffeebreak.service.ResponseConversionService;
 
@@ -16,23 +17,28 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.xml.bind.JAXBException;
+import java.util.Collections;
+
+import static com.awin.coffeebreak.dto.ErrorCode.VALIDATION_ERROR;
 
 @RestController
 @AllArgsConstructor
 public class CoffeeBreakPreferenceController {
 
-    private ResponseConversionService responseConversionService;
-    private CoffeeBreakService coffeeBreakService;
+    private final ResponseConversionService responseConversionService;
+    private final CoffeeBreakService coffeeBreakService;
 
 
     /**
      * Publishes the list of preferences in the requested format
      */
     @GetMapping(path = "/today")
-    public ResponseEntity<String> today(@RequestParam("format") String format) throws JsonProcessingException, JAXBException {
+    public ResponseEntity<String> today(@RequestParam("format") String format) throws JsonProcessingException, JAXBException, ValidationErrorException {
 
         String responseContent = "";
         String contentType = "text/html";
+
+        coffeeBreakService.validateRequestFormat(format);
 
         Preferences preferences = Preferences.builder()
                 .preference(coffeeBreakService.getTodayPreferences())
@@ -61,8 +67,9 @@ public class CoffeeBreakPreferenceController {
     @GetMapping("/notifyStaffMember")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void notifyStaffMember(@RequestParam("staffMemberId") int id) throws NotFoundException {
-        coffeeBreakService.sendNotification(id);
+        coffeeBreakService.notifyStaffMember(id);
     }
+
 
 
 }

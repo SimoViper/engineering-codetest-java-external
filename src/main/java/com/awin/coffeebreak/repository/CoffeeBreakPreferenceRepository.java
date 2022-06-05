@@ -2,7 +2,6 @@ package com.awin.coffeebreak.repository;
 
 import com.awin.coffeebreak.entity.CoffeeBreakPreference;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

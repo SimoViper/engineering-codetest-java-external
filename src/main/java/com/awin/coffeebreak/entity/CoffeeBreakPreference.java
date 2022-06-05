@@ -1,15 +1,12 @@
 package com.awin.coffeebreak.entity;
 
-import com.awin.coffeebreak.dto.Type;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.Instant;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.*;
 
 @Data
